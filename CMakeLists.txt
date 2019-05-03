@@ -10,10 +10,10 @@ project(conan_wrapper CXX)
 # include(${CMAKE_BINARY_DIR}/conan.cmake)
 include(conan.cmake)
 
-conan_add_remote(NAME bincrafters INDEX 1
-        URL https://api.bintray.com/conan/bincrafters/public-conan)
+#conan_add_remote(NAME bincrafters INDEX 1
+#        URL https://api.bintray.com/conan/bincrafters/public-conan)
 
-conan_cmake_run(REQUIRES boost_beast/1.69.0@bincrafters/stable
+conan_cmake_run(REQUIRES boost/1.70.0@conan/stable
         BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 
