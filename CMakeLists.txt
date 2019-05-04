@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(conan_wrapper CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+
 # if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 #   message(STATUS "Downloading conan.cmake from https://github.com/memsharded/cmake-conan")
 #   file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/master/conan.cmake"
