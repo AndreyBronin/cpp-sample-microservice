@@ -1,6 +1,6 @@
 # C++ cloud-native sample microservice
 
-![Docker Build Status](https://img.shields.io/docker/build/bronin/cpp-sample-microservice.svg)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/bronin/cpp-sample-microservice.svg)](https://hub.docker.com/r/bronin/cpp-sample-microservice)
 
 This demo project described in article series ["Modern cloud-native C++ microservice.](https://medium.com/@andreybronin/modern-cloud-native-c-microservice-part-1-intro-b71de543f94b)
 
