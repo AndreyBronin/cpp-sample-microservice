@@ -1,5 +1,8 @@
+# C++ cloud-native sample microservice
 
-This demo project describes in article series ["Modern cloud-native C++ microservice.](https://medium.com/@andreybronin/modern-cloud-native-c-microservice-part-1-intro-b71de543f94b)
+![Docker Build Status](https://img.shields.io/docker/build/bronin/cpp-sample-microservice.svg)
+
+This demo project described in article series ["Modern cloud-native C++ microservice.](https://medium.com/@andreybronin/modern-cloud-native-c-microservice-part-1-intro-b71de543f94b)
 
 * [Part 1 — Intro](https://medium.com/@andreybronin/modern-cloud-native-c-microservice-part-1-intro-b71de543f94b)
 * Part 2 — What is cloud-native
@@ -7,3 +10,9 @@ This demo project describes in article series ["Modern cloud-native C++ microser
 * Part 4 — Databases
 * Part 5— Auth, JWT
 * Part 6— API, REST, RPC
+
+## Usage
+
+```
+docker run --rm bronin/cpp-sample-microservice
+```
