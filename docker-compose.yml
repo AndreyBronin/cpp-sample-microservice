@@ -1,0 +1,112 @@
+version: '3.7'
+volumes:
+ pg_db:
+
+services:
+  redis:
+    image: redis:5-alpine
+    restart: always
+    # ports:
+    #   - 6379:6379
+
+  db:
+    image: postgres:9.5-alpine
+    restart: always
+    volumes:
+        - pg_db:/var/lib/postgresql/data
+    environment:
+        - POSTGRES_PASSWORD=sample
+        - POSTGRES_USER=sample
+        - POSTGRES_DB=sample
+        - PGDATA=/var/lib/postgresql/data/pgdata
+    # ports:
+    #     - 5432:5432
+
+  sample:
+    image: bronin/cpp-sample-microservice:latest
+    restart: always
+    links:
+      - db
+    ports:
+      - 8080:8080
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: sample
+      DB_PASS: sample
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: on-failure
+
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - db
+    ports:
+      - 8081:8080
+
+
+#  grafana:
+#    image: grafana/grafana:5.4.2
+#    environment:
+#      - GF_SECURITY_ADMIN_PASSWORD=pass
+#      - GF_EXPLORE_ENABLED=true
+#    volumes:
+#      - ./monitor/grafana/provisioning:/etc/grafana/provisioning
+#      - ./monitor/grafana/config.ini:/etc/grafana/config.ini
+#      - ./monitor/grafana/dashboards:/var/lib/grafana/dashboards
+#    #    depends_on:
+#    #      - prometheus
+#    ports:
+#      - "3000:3000"
+
+  # elastic and kibana are optional here,
+  # but they provide more powerful  search and analysis than Jaeger's UI (augments it actually).
+#  elasticsearch:
+#    image: "docker.elastic.co/elasticsearch/elasticsearch:6.5.4"
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    environment:
+#      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+#      discovery.type: "single-node"
+#      xpack.security.enabled: "false"
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:9200/_cat/health?h=st"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#      start_period: 30s
+#    # restart: on-failure
+#
+#  kibana:
+#    image: "docker.elastic.co/kibana/kibana:6.5.4"
+#    ports:
+#      - "5601:5601"
+#    depends_on:
+#      - elasticsearch
+#
+#  jaeger:
+#    image: "jaegertracing/all-in-one:1.8"
+#    ports:
+#      - "6831:6831/udp"
+#      - "16686:16686"
+#      - "16687:16687"
+#    environment:
+#      SPAN_STORAGE_TYPE: "elasticsearch"
+#      ES_SERVER_URLS: "http://elasticsearch:9200"
+#      ES_TAGS_AS_FIELDS: "true"
+#    depends_on:
+#      - elasticsearch
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:16687/"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#      start_period: 30s
+#    restart: on-failure
