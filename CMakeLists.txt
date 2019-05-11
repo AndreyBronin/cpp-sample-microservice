@@ -16,6 +16,7 @@ include(conan.cmake)
 #        URL https://api.bintray.com/conan/bincrafters/public-conan)
 
 conan_cmake_run(REQUIRES boost/1.70.0@conan/stable
+        solidity/develop@andreybronin/testing
         BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 

@@ -27,6 +27,17 @@
 #include <thread>
 #include <vector>
 
+#include <libsolidity/interface/Version.h>
+#include <libsolidity/interface/StandardCompiler.h>
+
+void printVersion()
+{
+    std::cout << dev::solidity::VersionStringStrict << std::endl;
+
+    dev::solidity::StandardCompiler compiler;
+    std::cout << compiler.compile(std::string(""));
+}
+
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace net = boost::asio;            // from <boost/asio.hpp>
@@ -444,6 +455,7 @@ private:
 
 int main(int argc, char* argv[])
 {
+    printVersion();
     // Check command line arguments.
     if (argc != 5)
     {
