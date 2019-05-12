@@ -1,0 +1,6 @@
+[requires]
+boost/1.70.0@andreybronin/stable
+solidity/develop@andreybronin/testing
+
+[generators]
+cmake
