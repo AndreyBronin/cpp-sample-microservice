@@ -1,0 +1,13 @@
+[requires]
+boost/1.70.0@conan/stable
+solidity/develop@andreybronin/testing
+
+[options]
+solidity:shared=True
+jsoncpp:shared=True
+
+[generators]
+cmake
+
+[imports]
+lib, *.so -> /usr/local/lib

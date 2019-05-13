@@ -3,8 +3,8 @@ project(cpp-sample-microservice CXX)
 
 #set(CMAKE_CXX_STANDARD 17)
 
-#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 # if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 #   message(STATUS "Downloading conan.cmake from https://github.com/memsharded/cmake-conan")
@@ -13,20 +13,22 @@ project(cpp-sample-microservice CXX)
 # endif()
 
 # include(${CMAKE_BINARY_DIR}/conan.cmake)
-include(conan.cmake)
+#include(conan.cmake)
 
 #conan_add_remote(NAME bincrafters INDEX 1
 #        URL https://api.bintray.com/conan/bincrafters/public-conan)
 
-conan_add_remote(NAME andreybronin URL https://api.bintray.com/conan/andreybronin/conan)
+#conan_add_remote(NAME andreybronin URL https://api.bintray.com/conan/andreybronin/conan)
+#
+#conan_cmake_run(REQUIRES boost/1.70.0@andreybronin/stable
+#        solidity/develop@andreybronin/testing
+#        BASIC_SETUP CMAKE_TARGETS
+#                BUILD missing)
+#
+#
+#conan_basic_setup()
 
-conan_cmake_run(REQUIRES boost/1.70.0@andreybronin/stable
-        solidity/develop@andreybronin/testing
-        BASIC_SETUP CMAKE_TARGETS
-                BUILD missing)
-
-
-conan_basic_setup()
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
 add_executable(main main.cpp)
 target_link_libraries(main ${CONAN_LIBS})
